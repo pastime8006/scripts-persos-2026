@@ -1,0 +1,27 @@
+sudo chown -R todd:www-data /home/todd/myserver/paweb
+sudo find /home/todd/projet-9/studio-koukaki-local -type d -exec chmod 775 {} \;
+sudo find /home/todd/projet-9/studio-koukaki-local -type f -exec chmod 664 {} \;
+
+wp_nav_menu(
+			apply_filters(
+				'neve_header_menu_args',
+				array(
+					'theme_location' => 'planty-menu',
+					'container'      => false,
+					'menu_class'     => 'neve-menu',
+					'fallback_cb'    => false,
+				)
+			)
+		);
+
+        function neve_child_register_menus() {
+    register_nav_menus( array(
+        'admin-menu' => __( 'Admin Menu', 'neve-child' ),
+    ) );
+}
+
+add_action( 'after_setup_theme', 'neve_child_register_menus' );
+
+
+# Télécharger la dernière version FR de WordPress (remplace l'URL si une nouvelle version est sortie)
+sudo wget https://fr.wordpress.org/latest-fr_FR.zip
